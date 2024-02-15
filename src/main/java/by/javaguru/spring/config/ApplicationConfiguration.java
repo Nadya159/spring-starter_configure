@@ -19,10 +19,20 @@ public class ApplicationConfiguration {
     @Bean("pool1")
     @Profile("prod")
     @Scope(BeanDefinition.SCOPE_SINGLETON)
-    public Connection connectionPool1(@Value("${db.url}") String url,
-                                      @Value("${db.username}") String username,
-                                      @Value("${db.pool.size}") Integer poolSize,
-                                      @Value("${db.password}") String password) {
+    public Connection connectionPoolProd(@Value("${db.url.prod}") String url,
+                                      @Value("${db.username.prod}") String username,
+                                      @Value("${db.pool.size.prod}") Integer poolSize,
+                                      @Value("${db.password.prod}") String password) {
+        return ConnectionPool.getConnection(url, username, poolSize, password);
+    }
+
+    @Bean("pool2")
+    @Profile("test")
+    @Scope(BeanDefinition.SCOPE_SINGLETON)
+    public Connection connectionPoolTest(@Value("${db.url.test}") String url,
+                                      @Value("${db.username.test}") String username,
+                                      @Value("${db.pool.size.test}") Integer poolSize,
+                                      @Value("${db.password.test}") String password) {
         return ConnectionPool.getConnection(url, username, poolSize, password);
     }
 }
