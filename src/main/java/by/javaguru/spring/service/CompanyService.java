@@ -11,6 +11,7 @@ import java.util.Optional;
 public class CompanyService {
     private final CompanyRepository companyRepository;
 
+    @Autowired
     public CompanyService(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
